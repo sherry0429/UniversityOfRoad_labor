@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.universityofroad.MainActivity" >
+
+    <Button
+        android:layout_weight="0.3"
+        android:id="@+id/aboutus"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="@color/antiquewhite"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:text="关于我们" />
+
+    <LinearLayout
+        android:layout_weight="0.7"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" >
+
+        <Button
+            android:id="@+id/StudentNeedKnow"
+            android:layout_weight="0.35"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_green_be_pink"
+            android:text="新生须知"
+            android:textSize="32sp" />
+
+        <Button
+            android:id="@+id/WaittingDevelop"
+            android:layout_weight="0.35"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_orange_be_blue"
+            android:text="尽请期待"
+            android:textSize="32sp" />
+    </LinearLayout>
+
+</LinearLayout>

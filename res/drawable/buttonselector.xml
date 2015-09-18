@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="true" android:state_pressed="true"><shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+
+            <solid android:color="@android:color/holo_blue_bright"></solid>
+
+            <size android:height="32dp" android:width="72dp"></size>
+
+            <padding android:bottom="5dp" android:left="5dp" android:right="5dp" android:top="5dp"></padding>
+        </shape></item>
+    <item android:state_enabled="true" android:state_pressed="false"><shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+
+            <size android:height="32dp" android:width="72dp"></size>
+
+            <padding android:bottom="5dp" android:left="5dp" android:right="5dp" android:top="5dp"></padding>
+
+            <solid android:color="@android:color/holo_orange_light"></solid>
+        </shape></item>
+
+</selector>
+
+
+<!-- Shape常用属性：
+
+solid：实心，就是填充的意思 
+android:color指定填充的颜色 
+gradient：渐变 
+android:startColor和android:endColor分别为起始和结束颜色，ndroid:angle是渐变角度，必须为45的整数倍。另外渐变默认的模式为android:type="linear"，即线性渐变，可以指定渐变为径向渐变，android:type="radial"，径向渐变需要指定半径android:gradientRadius="50"。 
+
+stroke：描边 
+android:width="2dp" 描边的宽度，android:color 描边的颜色。 
+我们还可以把描边弄成虚线的形式，设置方式为： 
+android:dashWidth="5dp" 
+android:dashGap="3dp" 
+其中android:dashWidth表示'-'这样一个横线的宽度，android:dashGap表示之间隔开的距离。 
+
+corners：圆角 
+android:radius为角的弧度，值越大角越圆。
+
+
+size：设置大小
+
+
+padding：设置内部间距 -->

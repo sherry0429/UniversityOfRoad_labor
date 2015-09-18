@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.universityofroad"
+    android:versionCode="6"
+    android:versionName="1.6" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.NoTitleBar" >
+        <activity
+            android:name=".ViewPagerPort"
+            android:screenOrientation="nosensor"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="nosensor"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".StudentNeedKnow"
+            android:screenOrientation="nosensor"
+            android:label="@string/title_activity_student_need_know" >
+        </activity>
+        <activity
+            android:name=".UnverSityRoad"
+            android:screenOrientation="nosensor"
+            android:label="@string/title_activity_unver_sity_road" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad_tips.ShowList"
+            android:screenOrientation="nosensor"
+            android:label="@string/title_activity_show_list" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad_tips.ReadText"
+            android:screenOrientation="nosensor"
+            android:label="@string/title_activity_read_text" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad_shortcut_map.SwustMap"
+            android:screenOrientation="nosensor"
+            android:label="@string/title_activity_swust_map" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad_shortcut_map.LookMap"
+            android:screenOrientation="nosensor"
+            android:label="@string/title_activity_look_map" >
+        </activity>
+        <activity 
+            android:name="com.example.universityofroad_shortcut.Sc_ShortCutNote"
+            android:screenOrientation="nosensor"
+             >
+        </activity>
+        <activity 
+            android:name="com.example.universityofroad_shortcut.Sc_BaseActivity"
+            android:screenOrientation="nosensor"
+             >
+        </activity>
+        <activity 
+            android:name="com.example.universityofroad_shortcut.Sc_WriteActivity"
+            android:screenOrientation="nosensor"
+             >
+        </activity>
+        <activity 
+            android:name="com.example.universityofroad_shortcut.Sc_EditActivity"
+            android:screenOrientation="nosensor" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad_about.AboutUs"
+            android:screenOrientation="nosensor"
+            android:label="@string/title_activity_about_us" >
+        </activity>
+        <activity
+            android:name=".ExcellentList"
+            android:screenOrientation="nosensor"
+            android:label="@string/title_activity_excellent_list" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad_execellent.Ex_listmap"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_ex_listmap" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad_choose.ChooseView"
+            android:screenOrientation="nosensor"
+            android:label="@string/title_activity_choose_view" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad.robot.Robot"
+            android:screenOrientation="nosensor">
+        </activity>
+    </application>
+
+</manifest>

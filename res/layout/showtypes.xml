@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@id/dateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="27.0dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8.0dip"
+        android:background="@drawable/showtop"
+        android:gravity="center"
+        android:textColor="@color/orange" />
+
+    <TextView
+        android:id="@id/contentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="68.0dip"
+        android:layout_below="@id/dateTextView"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/showdown"
+        android:textColor="#ff000000"
+        android:textSize="18.0sp" />
+
+</RelativeLayout>

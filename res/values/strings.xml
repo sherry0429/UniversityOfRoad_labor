@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">大學之路</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_student_need_know">StudentNeedKnow</string>
+    <string name="title_activity_unver_sity_road">UnverSityRoad</string>
+    <string name="title_activity_show_list">ShowList</string>
+    <string name="title_activity_read_text">ReadText</string>
+    <string name="title_activity_swust_map">SwustMap</string>
+    <string name="title_activity_look_map">LookMap</string>
+    <string name="title_activity_view_pager_port">ViewPagerPort</string>
+    <string name="title_activity_read_html">ReadHtml</string>
+    <string name="title_activity_htmltry">HTMLTry</string>
+    <string name="title_activity_about_us">AboutUs</string>
+    <string name="title_activity_excellent_list">ExcellentList</string>
+    <string name="title_activity_sc_list">Sc_list</string>
+    <string name="title_activity_ex_listmap">Ex_listmap</string>
+    <string name="title_activity_ex_adapter">Ex_adapter</string>
+    <string name="title_activity_choose_view">ChooseView</string>
+
+</resources>
