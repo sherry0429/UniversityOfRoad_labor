@@ -7,17 +7,24 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.universityofroad.R;
@@ -36,6 +43,10 @@ public class Robot extends Activity
 	 */
 	private ListView mChatView;
 	private Button button;
+	private Button questionButton;
+	private boolean exit;
+	private String temp;
+	//temp,onResume,OnSaveInstanceState,用于保存当前activity状态,防止因内存不足而引起的内存回收
 	/**
 	 * 文本域
 	 */
@@ -61,19 +72,49 @@ public class Robot extends Activity
 		};
 	};
 
+	//Create
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main_chatting);
 		
 		initView();
 		
 		mAdapter = new ChatMessageAdapter(this, mDatas);
 		mChatView.setAdapter(mAdapter);
-
+        if (savedInstanceState != null) {  
+            temp = savedInstanceState.getString("temp");  
+            System.out.println("onCreate: temp = " + temp);  
+        }  
 	}
+	//Menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    
+    @Override
+    protected void onResume() {
+    	// TODO Auto-generated method stub
+    	super.onResume();
+        temp = "xing";  
+        System.out.println("onResume: temp = " + temp);  
+        // 切换屏幕方向会导致activity的摧毁和重建  
+        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {  
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);  
+        }  
+    }
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+    	// TODO Auto-generated method stub
+    	super.onSaveInstanceState(outState);
+    	outState.putString("temp", temp);
+    }
+	
 
 	private void initView()
 	{
@@ -98,6 +139,7 @@ public class Robot extends Activity
 				"经过管理员审核，下一次再问我的时候，我就会回答了哦！\n" +
 				"愿你今天过的开心！"));
 		button = (Button)findViewById(R.id.go_uninternet);
+		questionButton = (Button)findViewById(R.id.show_question);
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -107,7 +149,50 @@ public class Robot extends Activity
 				startActivity(intent);
 			}
 		});
+		questionButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				openOptionsMenu();
+			}
+		});
 		
+		exit = false;//当在对话界面按返回键时,提示返回后会清除聊天记录
+		
+		
+		//判断EditText当前是否获取焦点 如果不获取 那么隐藏软键盘
+		OnFocusChangeListener mFocusChangedListener;
+		mFocusChangedListener = new OnFocusChangeListener() {
+		    @Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					;
+				} else {
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+				}
+			}
+		};
+		EditText variableValueView = (EditText) findViewById(R.id.id_chat_msg);
+		variableValueView.setOnFocusChangeListener(mFocusChangedListener);
+		
+	}
+	
+
+	
+	//防止用户直接返回丢失聊天信息
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if(!exit){
+			Toast.makeText(Robot.this, "确定要返回嘛？返回的话聊天记录会消失的哦！\n" +
+					"你可以先长按选择文本来保存内容，再进行返回哦！\n" +
+					"再按一次返回会退出！", Toast.LENGTH_SHORT).show();
+			exit=true;
+			return false;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	public void sendMessage(View view)
@@ -128,7 +213,6 @@ public class Robot extends Activity
 
 		mMsg.setText("");
 
-		// 关闭软键盘
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		// 得到InputMethodManager的实例
 		if (imm.isActive())
@@ -158,5 +242,7 @@ public class Robot extends Activity
 		}.start();
 
 	}
+	
+	
 
 }

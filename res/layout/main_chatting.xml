@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/nightsky"
+    android:clickable="true"
+    android:id="@+id/robotrelative"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -26,8 +28,15 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:background="@drawable/pin" />
+        
+        <Button
+            android:id="@+id/show_question"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/limit_question" />
 
-    </RelativeLayout>s
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/ly_chat_bottom"
