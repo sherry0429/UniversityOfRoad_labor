@@ -361,15 +361,12 @@ public class Robot extends FragmentActivity
 		// TODO Auto-generated method stub
 		switch(ev.getAction()){
 		case MotionEvent.ACTION_DOWN:
-			Toast.makeText(Robot.this, "DOWN", Toast.LENGTH_SHORT).show();
 			handleActionDown(ev);
 			break;
 		case MotionEvent.ACTION_MOVE:
-			Toast.makeText(Robot.this, "MOVE", Toast.LENGTH_SHORT).show();
 			handleActionMove(ev);
 			break;
 		case MotionEvent.ACTION_UP:
-			Toast.makeText(Robot.this, "UP", Toast.LENGTH_SHORT).show();
 			handleActionUp(ev);
 			break;
 		}
@@ -391,7 +388,6 @@ public class Robot extends FragmentActivity
 	private boolean handleActionMove(MotionEvent ev) {
 		float deltaX = ev.getX() - mDownX;
 		float deltaY = ev.getY() - mDownY;
-		Log.i("point", "x: " + deltaX + "y: " + deltaY);
 		// 向右滑动 X方向滑动的距离大于mSlop并且Y方向滑动的距离小于mSlop，表示可以滑动
 		//向左滑动 关闭fragment
 		if (deltaX > 0 && Math.abs(deltaX) > mSlop && Math.abs(deltaY) < mSlop/2) {
