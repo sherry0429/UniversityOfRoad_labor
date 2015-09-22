@@ -55,7 +55,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="80dp"
             android:textColor="@android:color/holo_orange_light"
-            android:text="新生Tips" />
+            android:text="西科百晓生" />
 
         <TextView
             android:id="@+id/textView2"
@@ -82,40 +82,16 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_centerInParent="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="80dp"
             android:background="@drawable/exce" />
-
-        <Button
-            android:id="@+id/where"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_centerInParent="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="80dp"
-            android:background="@drawable/swust" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="65dp"
             android:layout_below="@id/Laboratory_and_Excellent_class"
             android:textColor="@android:color/holo_blue_dark"
-            android:text="卓越班,实验室" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="80dp"
-            android:layout_below="@id/where"
-            android:textColor="@android:color/holo_green_light"
-            android:text="西科地图" />
+            android:text="各种团队" />
 
     </RelativeLayout>
 

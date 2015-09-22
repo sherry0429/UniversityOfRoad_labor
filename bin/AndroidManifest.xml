@@ -24,9 +24,9 @@
         android:theme="@android:style/Theme.NoTitleBar" >
         <activity
             android:name=".ViewPagerPort"
-            android:screenOrientation="nosensor"
             android:icon="@drawable/icon"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="nosensor" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,82 +35,83 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="nosensor"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name=".StudentNeedKnow"
-            android:screenOrientation="nosensor"
-            android:label="@string/title_activity_student_need_know" >
+            android:label="@string/title_activity_student_need_know"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name=".UnverSityRoad"
-            android:screenOrientation="nosensor"
-            android:label="@string/title_activity_unver_sity_road" >
+            android:label="@string/title_activity_unver_sity_road"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.example.universityofroad_tips.ShowList"
-            android:screenOrientation="nosensor"
-            android:label="@string/title_activity_show_list" >
+            android:label="@string/title_activity_show_list"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.example.universityofroad_tips.ReadText"
-            android:screenOrientation="nosensor"
-            android:label="@string/title_activity_read_text" >
+            android:label="@string/title_activity_read_text"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.example.universityofroad_shortcut_map.SwustMap"
-            android:screenOrientation="nosensor"
-            android:label="@string/title_activity_swust_map" >
+            android:label="@string/title_activity_swust_map"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.example.universityofroad_shortcut_map.LookMap"
-            android:screenOrientation="nosensor"
-            android:label="@string/title_activity_look_map" >
+            android:label="@string/title_activity_look_map"
+            android:screenOrientation="nosensor" >
         </activity>
-        <activity 
+        <activity
             android:name="com.example.universityofroad_shortcut.Sc_ShortCutNote"
-            android:screenOrientation="nosensor"
-             >
+            android:screenOrientation="nosensor" >
         </activity>
-        <activity 
+        <activity
             android:name="com.example.universityofroad_shortcut.Sc_BaseActivity"
-            android:screenOrientation="nosensor"
-             >
+            android:screenOrientation="nosensor" >
         </activity>
-        <activity 
+        <activity
             android:name="com.example.universityofroad_shortcut.Sc_WriteActivity"
-            android:screenOrientation="nosensor"
-             >
+            android:screenOrientation="nosensor" >
         </activity>
-        <activity 
+        <activity
             android:name="com.example.universityofroad_shortcut.Sc_EditActivity"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.example.universityofroad_about.AboutUs"
-            android:screenOrientation="nosensor"
-            android:label="@string/title_activity_about_us" >
+            android:label="@string/title_activity_about_us"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name=".ExcellentList"
-            android:screenOrientation="nosensor"
-            android:label="@string/title_activity_excellent_list" >
+            android:label="@string/title_activity_excellent_list"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.example.universityofroad_execellent.Ex_listmap"
-            android:screenOrientation="landscape"
-            android:label="@string/title_activity_ex_listmap" >
+            android:label="@string/title_activity_ex_listmap"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="com.example.universityofroad_choose.ChooseView"
-            android:screenOrientation="nosensor"
-            android:label="@string/title_activity_choose_view" >
+            android:label="@string/title_activity_choose_view"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.example.universityofroad.robot.Robot"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="nosensor">
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad.roadfuction.Roadway"
+            android:label="@string/title_activity_roadway" >
         </activity>
     </application>
 

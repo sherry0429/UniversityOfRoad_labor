@@ -11,16 +11,23 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract.CommonDataKinds.Event;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -32,8 +39,12 @@ import com.example.universityofroad.robot.ChatMessage;
 import com.example.universityofroad.robot.ChatMessage.Type;
 import com.example.universityofroad.robot.HttpUtils;
 import com.example.universityofroad_tips.ShowList;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorListenerAdapter;
+import com.nineoldandroids.view.ViewHelper;
+import com.nineoldandroids.view.ViewPropertyAnimator;
 
-public class Robot extends Activity
+public class Robot extends FragmentActivity
 {
 	
 	//INPUT 服务器传入的信息
@@ -47,6 +58,28 @@ public class Robot extends Activity
 	private boolean exit;
 	private String temp;
 	//temp,onResume,OnSaveInstanceState,用于保存当前activity状态,防止因内存不足而引起的内存回收
+	
+	private DrawerLayout mDrawerLayout;//左滑菜单
+	private boolean mDrawLayout_state = false;
+	//处理滑动的变量
+	/**
+	 * 认为是用户滑动的最小距离
+	 */
+	private int mSlop = 200;
+	/**
+	 * 用来标记用户是否正在滑动的滑动方向
+	 */
+	private boolean mSwiping_left = false;
+	private boolean mSwiping_right = false;
+	/**
+	 * 手指按下的position
+	 */
+	private int mDownPosition;
+	private float mDownX;
+	private float mDownY;
+	
+	
+	
 	/**
 	 * 文本域
 	 */
@@ -78,16 +111,23 @@ public class Robot extends Activity
 	{
 		
 		super.onCreate(savedInstanceState);
+		try{
 		setContentView(R.layout.main_chatting);
 		
 		initView();
 		
 		mAdapter = new ChatMessageAdapter(this, mDatas);
 		mChatView.setAdapter(mAdapter);
+		
+		//防止内存回收当前activity并未保存
         if (savedInstanceState != null) {  
             temp = savedInstanceState.getString("temp");  
             System.out.println("onCreate: temp = " + temp);  
         }  
+		}catch(Exception e){
+			e.printStackTrace();
+			Log.i("LoadError:", "error:" + e.toString());
+		}
 	}
 	//Menu
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,7 +172,8 @@ public class Robot extends Activity
 				"7.什么是学士学位证书\n" +
 				"8.我丢了校园卡\n" +
 				"9.我怎么样才能毕业\n" +
-				"10.西南科技大学在哪\n" +
+				"10.图书馆几点开门\n" +
+				"11.查快递 快递单号\n" +
 				"当然也可以问我其他的问题哦！不过我知不知道就不好说辣~~~" +
 				"你可以试试，哈哈~\n" +
 				"如果遇到我不会的问题，你可以将问题和答案发送到380881937@qq.com," +
@@ -154,7 +195,17 @@ public class Robot extends Activity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				openOptionsMenu();
+				if(!mDrawLayout_state){
+				mDrawerLayout.openDrawer(Gravity.LEFT);
+				mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED,
+						Gravity.RIGHT);
+				mDrawLayout_state = true;	
+				}else{
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED,
+							Gravity.RIGHT);
+					mDrawLayout_state = false;
+				}
 			}
 		});
 		
@@ -176,19 +227,80 @@ public class Robot extends Activity
 		};
 		EditText variableValueView = (EditText) findViewById(R.id.id_chat_msg);
 		variableValueView.setOnFocusChangeListener(mFocusChangedListener);
-		
+		//初始化侧滑菜单
+		initmenu();
+		initmenu_event();
 	}
 	
+	private void initmenu_event(){
+		mDrawerLayout.setDrawerListener(new DrawerListener() {
+			
+			@Override
+			public void onDrawerStateChanged(int arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onDrawerSlide(View drawerView, float slideOffset) {
+				// TODO Auto-generated method stub
+				if (drawerView.getTag().equals("LEFT")) {
+					View mContent = mDrawerLayout.getChildAt(0);
+					View mMenu = drawerView;
+					float scale = 1 - slideOffset;
+					float rightScale = 0.8f + scale * 0.2f;
 
+					float leftScale = 1 - 0.3f * scale;
+
+					ViewHelper.setScaleX(mMenu, leftScale);
+					ViewHelper.setScaleY(mMenu, leftScale);
+					ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
+					ViewHelper.setTranslationX(mContent,
+							mMenu.getMeasuredWidth() * (1 - scale));
+					ViewHelper.setPivotX(mContent, 0);
+					ViewHelper.setPivotY(mContent,
+							mContent.getMeasuredHeight() / 2);
+					mContent.invalidate();
+					ViewHelper.setScaleX(mContent, rightScale);
+					ViewHelper.setScaleY(mContent, rightScale);
+				}
+			}
+
+			@Override
+			public void onDrawerOpened(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onDrawerClosed(View arg0) {
+				// TODO Auto-generated method stub
+				mDrawerLayout.setDrawerLockMode(
+						DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.RIGHT);
+			}
+		});
+	}
+	
+	private void initmenu(){
+		//初始化侧滑菜单
+		mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_menu_left);
+		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,
+				Gravity.RIGHT);
+		
+
+	}
 	
 	//防止用户直接返回丢失聊天信息
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if(!exit){
-			Toast.makeText(Robot.this, "确定要返回嘛？返回的话聊天记录会消失的哦！\n" +
-					"你可以先长按选择文本来保存内容，再进行返回哦！\n" +
-					"再按一次返回会退出！", Toast.LENGTH_SHORT).show();
+			Toast toast = Toast.makeText(Robot.this, "确定要返回嘛？返回的话聊天记录会消失的哦！\n" +
+					"你可以先长按文本来选择保存需要的内容，再进行返回哦！\n" +
+					"再按一次返回会退出！", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+			
 			exit=true;
 			return false;
 		}
@@ -243,6 +355,70 @@ public class Robot extends Activity
 
 	}
 	
+	//滑动显示菜单的处理
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		// TODO Auto-generated method stub
+		switch(ev.getAction()){
+		case MotionEvent.ACTION_DOWN:
+			Toast.makeText(Robot.this, "DOWN", Toast.LENGTH_SHORT).show();
+			handleActionDown(ev);
+			break;
+		case MotionEvent.ACTION_MOVE:
+			Toast.makeText(Robot.this, "MOVE", Toast.LENGTH_SHORT).show();
+			handleActionMove(ev);
+			break;
+		case MotionEvent.ACTION_UP:
+			Toast.makeText(Robot.this, "UP", Toast.LENGTH_SHORT).show();
+			handleActionUp(ev);
+			break;
+		}
+		return super.dispatchTouchEvent(ev);
+	}
 	
+	private void handleActionDown(MotionEvent ev) {
+		mDownX = ev.getX();
+		mDownY = ev.getY();
+	}
+	
+
+	/**
+	 * 处理手指滑动的方法
+	 * 
+	 * @param ev
+	 * @return
+	 */
+	private boolean handleActionMove(MotionEvent ev) {
+		float deltaX = ev.getX() - mDownX;
+		float deltaY = ev.getY() - mDownY;
+		Log.i("point", "x: " + deltaX + "y: " + deltaY);
+		// 向右滑动 X方向滑动的距离大于mSlop并且Y方向滑动的距离小于mSlop，表示可以滑动
+		//向左滑动 关闭fragment
+		if (deltaX > 0 && Math.abs(deltaX) > mSlop && Math.abs(deltaY) < mSlop/2) {
+			mSwiping_left=false;
+			mDrawerLayout.openDrawer(Gravity.LEFT);
+			mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED,
+					Gravity.RIGHT);
+		}else if(deltaX < 0 && Math.abs(deltaX) > mSlop && Math.abs(deltaY) < mSlop/2){
+			mSwiping_left=true;
+		}
+		
+		if (mSwiping_right) {
+
+		}else if(mSwiping_left){
+			mSwiping_right=false;
+		}
+
+		return super.onTouchEvent(ev);
+
+	}
+
+	/**
+	 * 手指抬起的事件处理
+	 * @param ev
+	 */
+	private void handleActionUp(MotionEvent ev) {
+		;
+	}
 
 }

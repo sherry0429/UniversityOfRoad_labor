@@ -30,11 +30,9 @@ public class StudentNeedKnow extends Activity {
 	private void InitWidget(){
 		button1 = (Button)findViewById(R.id.Tips);
 		button2 = (Button)findViewById(R.id.Eatbool);
-		button3 = (Button)findViewById(R.id.where);
 		button4 = (Button)findViewById(R.id.Laboratory_and_Excellent_class);
 		button1.setOnTouchListener(myTouchListener);
 		button2.setOnTouchListener(myTouchListener);
-		button3.setOnTouchListener(myTouchListener);
 		button4.setOnTouchListener(myTouchListener);
 	}
 	
@@ -60,7 +58,6 @@ public class StudentNeedKnow extends Activity {
 		// TODO Auto-generated method stub
 		button1.setBackgroundResource(R.drawable.tips);
 		button2.setBackgroundResource(R.drawable.bool);
-		button3.setBackgroundResource(R.drawable.swust);
 		button4.setBackgroundResource(R.drawable.exce);
 		super.onStop();
 	}
@@ -93,10 +90,6 @@ public class StudentNeedKnow extends Activity {
 //					v.setBackgroundResource(R.color.Cantsee);
 					v.setBackgroundResource(R.drawable.bool_eat);
 					break;
-				case R.id.where:
-//					v.setBackgroundResource(R.color.lightskyblue);
-					v.setBackgroundResource(R.drawable.swust_on);
-					break;
 				case R.id.Laboratory_and_Excellent_class:
 //					v.setBackgroundResource(R.color.whitesmoke);
 					v.setBackgroundResource(R.drawable.exce_on);
@@ -112,7 +105,6 @@ public class StudentNeedKnow extends Activity {
 //					v.setBackgroundResource(R.drawable.tips);
 					next = new Intent(StudentNeedKnow.this,
 							Robot.class);
-					next.putExtra("LoadWay", 1);
 					startActivity(next);
 					break;
 				case R.id.Eatbool:
@@ -121,12 +113,6 @@ public class StudentNeedKnow extends Activity {
 							Sc_ShortCutNote.class);
 //					next.putExtra("LoadWay", 2);
 					
-					startActivity(next);
-					break;
-				case R.id.where:
-//					v.setBackgroundResource(R.color.Cantsee);
-					next = new Intent(StudentNeedKnow.this,
-							LookMap.class);
 					startActivity(next);
 					break;
 				case R.id.Laboratory_and_Excellent_class:
