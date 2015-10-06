@@ -82,6 +82,8 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="80dp"
             android:background="@drawable/exce" />
 
         <TextView
@@ -89,9 +91,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="83dp"
             android:layout_below="@id/Laboratory_and_Excellent_class"
             android:textColor="@android:color/holo_blue_dark"
             android:text="各种团队" />
+        
+         <Button
+            android:id="@+id/ReturnAnswer"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="80dp"
+            android:background="@drawable/email" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="83dp"
+            android:layout_below="@id/ReturnAnswer"
+            android:textColor="@android:color/holo_green_light"
+            android:text="提交反馈" />
 
     </RelativeLayout>
 

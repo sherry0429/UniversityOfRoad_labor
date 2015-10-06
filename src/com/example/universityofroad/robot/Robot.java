@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.security.auth.PrivateCredentialPermission;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -161,24 +163,8 @@ public class Robot extends FragmentActivity
 		mChatView = (ListView) findViewById(R.id.id_chat_listView);
 		mMsg = (EditText) findViewById(R.id.id_chat_msg);
 		mDatas.add(new ChatMessage(Type.INPUT, "我是妖怪，Hello！\n" +
-				"你可以问我关于西科的以下问题：" +
-				"输入：\n" +
-				"1.丢东西了怎么办\n" +
-				"2.丢失了身份证\n" +
-				"3.奖学金\n" +
-				"4.农行卡\n" +
-				"5.请假\n" +
-				"6.什么是校园卡\n" +
-				"7.什么是学士学位证书\n" +
-				"8.我丢了校园卡\n" +
-				"9.我怎么样才能毕业\n" +
-				"10.图书馆几点开门\n" +
-				"11.查快递 快递单号\n" +
-				"当然也可以问我其他的问题哦！不过我知不知道就不好说辣~~~" +
-				"你可以试试，哈哈~\n" +
-				"如果遇到我不会的问题，你可以将问题和答案发送到380881937@qq.com," +
-				"经过管理员审核，下一次再问我的时候，我就会回答了哦！\n" +
-				"愿你今天过的开心！"));
+		"输入'菜单'得到当前可问的问题列表\n" +
+		"你可以右滑获取问题列表，点击相应问题即可获取回复哦！"));
 		button = (Button)findViewById(R.id.go_uninternet);
 		questionButton = (Button)findViewById(R.id.show_question);
 		button.setOnClickListener(new OnClickListener() {
@@ -305,6 +291,12 @@ public class Robot extends FragmentActivity
 			return false;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+	
+	public void sendSlienceMessage()
+	{
+	    String msg = "菜单";
+	    
 	}
 
 	public void sendMessage(View view)

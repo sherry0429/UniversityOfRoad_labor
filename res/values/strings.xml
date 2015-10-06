@@ -21,5 +21,6 @@
     <string name="title_activity_choose_view">ChooseView</string>
     <string name="title_activity_roadway">Roadway</string>
     <string name="title_activity_leftmenu_main">Leftmenu_main</string>
+    <string name="title_activity_answer_push">AnswerPush</string>
 
 </resources>

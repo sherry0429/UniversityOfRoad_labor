@@ -105,13 +105,17 @@
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.example.universityofroad.robot.Robot"
+            android:name=".robot.Robot"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
-            android:name="com.example.universityofroad.roadfuction.Roadway"
+            android:name=".roadfuction.Roadway"
             android:label="@string/title_activity_roadway" >
+        </activity>
+        <activity
+            android:name="com.example.universityofroad.ReturnAnswerBack.AnswerPush"
+            android:label="@string/title_activity_answer_push" >
         </activity>
     </application>
 
